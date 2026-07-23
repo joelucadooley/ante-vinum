@@ -229,7 +229,6 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:1px solid 
 .navlinks button{background:none;border:none;padding:8px 9px;font-family:var(--text);font-size:11px;font-weight:400;
   letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;border-bottom:1px solid transparent}
 .navlinks button.on{color:var(--gold);border-bottom-color:var(--gold)}
-.themebtn{top:auto;position:static;flex-shrink:0;width:32px;height:32px}
 @media(max-width:600px){
   .topbar-in{height:48px;padding:0 14px;gap:8px}
   .brand{font-size:16px;letter-spacing:.06em}
@@ -289,6 +288,9 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:1px solid 
 .e-desc{display:block;font-size:18px;color:var(--ink-soft);margin-top:5px;line-height:1.5;max-width:32em}
 .e-meta{font-family:var(--text);font-size:10.5px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ink-faint);white-space:nowrap;padding-top:11px}
+.entry.first{padding-left:16px}
+.entry.first .e-meta{color:var(--gold)}
+.entry.first::after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);opacity:.9}
 .entry:active{background:color-mix(in srgb,var(--card) 60%,transparent)}
 @media (hover:hover) and (pointer:fine){
   .entry:hover{padding-left:14px}
@@ -379,11 +381,10 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:1px solid 
 .sat-v{font-size:18px;color:var(--ink-soft);line-height:1.5}
 
 /* ============ toggle ============ */
-.themebtn{position:fixed;top:22px;right:22px;z-index:10;width:38px;height:38px;border-radius:50%;
+.themebtn{position:static;flex-shrink:0;width:34px;height:34px;border-radius:50%;
   border:1px solid var(--rule);color:var(--gold);display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(165deg,var(--card-hi),var(--card));
-  box-shadow:0 2px 6px var(--sh1),0 6px 16px var(--sh2),0 1px 0 var(--emboss) inset;
-  transition:border-color .25s,transform .25s}
+  background:linear-gradient(165deg,var(--card-hi),var(--card));background-color:var(--card);
+  box-shadow:0 1px 4px var(--sh1);transition:border-color .25s,transform .25s}
 
 
 /* ============ details & footer ============ */
@@ -1032,12 +1033,12 @@ function renderHome(){
    <span class="caps gold">LO${l[0]}</span><span>${l[1]}</span>
    <span class="caps">${l[2]}/50</span></div>`).join("");
  const entries=[
-  ["notes","I","Study notes","Ten chapters covering the whole syllabus, with profiles of every principal grape.","Read"],
+  ["notes","I","Study notes","Ten chapters covering the whole syllabus, with profiles of every principal grape.","Start here"],
   ["flashcards","II","Flashcards","Around 130 cards for drilling the detail once you have read a chapter.","130 cards"],
   ["quiz","III","Quick quiz","Ten questions at random, each explained the moment you answer.","10 questions"],
   ["exam","IV","Mock exam","A timed paper of fifty questions in sixty minutes, marked at the end.","60 minutes"],
   ["satref","V","Tasting reference","The vocabulary used to describe every wine, and what each colour tells you.","Reference"]
- ].map(i=>`<button class="entry" data-act="${i[0]}">
+ ].map((i,ix)=>`<button class="entry${ix===0?" first":""}" data-act="${i[0]}">
     <span class="e-num">${i[1]}</span>
     <span class="e-body"><span class="e-name">${i[2]}</span><span class="e-desc">${i[3]}</span></span>
     <span class="e-meta">${i[4]}</span></button>`).join("");
@@ -1056,8 +1057,7 @@ function renderHome(){
       </div>
     </div>
     <div class="bottle-cap">
-      <p>A study companion for the <span class="nb">WSET Level 2 Award in Wines</span>: ten chapters of notes,
-         nineteen grape profiles, flashcards and a timed mock paper.</p>
+      <p>A study companion for the <span class="nb">WSET Level 2 Award in Wines</span>.</p>
     </div>
   </header>
   <div class="sec"><span class="caps gold">Contents</span><span class="line"></span></div>
@@ -1255,10 +1255,12 @@ function renderSat(){
 
 const NAV=[["notes","Notes"],["flashcards","Cards"],["quiz","Quiz"],["exam","Exam"],["satref","Tasting"]];
 function renderNav(){
+ const bar=document.getElementById("navlinks");
+ if(state.view==="home"){bar.innerHTML="";return;}
  const cur={home:"",notes:"notes",note:"notes",decks:"flashcards",deck:"flashcards",
             quiz:(state.quiz&&state.quiz.mode==="exam")?"exam":"quiz",
             results:(state.quiz&&state.quiz.mode==="exam")?"exam":"quiz",satref:"satref"}[state.view]||"";
- document.getElementById("navlinks").innerHTML=NAV.map(n=>
+ bar.innerHTML=NAV.map(n=>
    `<button data-act="${n[0]}" class="${cur===n[0]?"on":""}">${n[1]}</button>`).join("");
 }
 function render(){
