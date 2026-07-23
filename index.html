@@ -3,8 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ante Vinum · WSET Level 2 Study Companion</title>
-<meta name="description" content="Flashcards, quizzes and a timed 50-question mock exam covering the WSET Level 2 Award in Wines syllabus.">
+<title>Ante Vinum &middot; WSET Level 2 Study Companion</title>
+<meta name="description" content="A study companion for the WSET Level 2 Award in Wines: ten chapters of notes, grape profiles, flashcards and a timed mock examination.">
+
+<!-- Update these two URLs if your repository is not named ante-vinum -->
+<link rel="canonical" href="https://joelucadooley.github.io/ante-vinum/">
+<meta property="og:url" content="https://joelucadooley.github.io/ante-vinum/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ante Vinum">
+<meta property="og:title" content="Ante Vinum &middot; WSET Level 2 Study Companion">
+<meta property="og:description" content="Ten chapters of notes, grape profiles, flashcards and a timed mock examination for the WSET Level 2 Award in Wines.">
+<meta property="og:image" content="https://joelucadooley.github.io/ante-vinum/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A wine bottle labelled Ante Vinum, beside the words WSET Level 2 Award in Wines.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ante Vinum &middot; WSET Level 2 Study Companion">
+<meta name="twitter:description" content="Ten chapters of notes, grape profiles, flashcards and a timed mock examination.">
+<meta name="twitter:image" content="https://joelucadooley.github.io/ante-vinum/og-image.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%20%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212.16%22%20fill%3D%22%231A070C%22/%3E%20%20%3Cpath%20d%3D%22M19%2013%20H45%20C45%2027.5%2038.6%2034.6%2032%2036.6%20C25.4%2034.6%2019%2027.5%2019%2013%20Z%22%20fill%3D%22%238A2338%22/%3E%20%20%3Cpath%20d%3D%22M19%2013%20H45%20C45%2027.5%2038.6%2034.6%2032%2036.6%20C25.4%2034.6%2019%2027.5%2019%2013%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23CBA24B%22%20stroke-width%3D%222.8%22%20stroke-linejoin%3D%22round%22/%3E%20%20%3Cpath%20d%3D%22M32%2036.6%20V48.5%22%20stroke%3D%22%23CBA24B%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Cpath%20d%3D%22M22.5%2050.5%20H41.5%22%20stroke%3D%22%23CBA24B%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#F4F3E4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#160709" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-title" content="Ante Vinum">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
@@ -1334,6 +1359,10 @@ function applyWine(mode){
  themebtn.setAttribute("aria-label","Switch to "+next+" wine mode");
  themebtn.setAttribute("title",(mode==="red"?"Red":"White")+" wine — switch to "+next);
  try{localStorage.setItem("av-wine",mode);}catch(e){}
+ document.querySelectorAll('meta[name="theme-color"]').forEach(m=>m.remove());
+ const tc=document.createElement("meta"); tc.name="theme-color";
+ tc.content = mode==="red" ? "#160709" : "#F4F3E4";
+ document.head.appendChild(tc);
 }
 themebtn.addEventListener("click",()=>{
  const now=document.documentElement.getAttribute("data-wine")==="red"?"white":"red";
