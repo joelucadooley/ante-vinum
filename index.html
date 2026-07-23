@@ -313,9 +313,7 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:1px solid 
 .e-desc{display:block;font-size:18px;color:var(--ink-soft);margin-top:5px;line-height:1.5;max-width:32em}
 .e-meta{font-family:var(--text);font-size:10.5px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ink-faint);white-space:nowrap;padding-top:11px}
-.entry.first{padding-left:16px}
 .entry.first .e-meta{color:var(--gold)}
-.entry.first::after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);opacity:.9}
 .entry:active{background:color-mix(in srgb,var(--card) 60%,transparent)}
 @media (hover:hover) and (pointer:fine){
   .entry:hover{padding-left:14px}
@@ -1101,7 +1099,7 @@ function renderHome(){
         <em>Wines: Looking Behind the Label</em>.</p>
     </div>
   </details>
-  <footer class="foot"><span class="mark">${ORNAMENT.mark}</span>Made by <a href="https://github.com/joelucadooley" target="_blank" rel="noopener">Joe Luca Dooley</a></footer>`;
+  <footer class="foot"><span class="mark">${ORNAMENT.mark}</span>Decanted by <a href="https://github.com/joelucadooley" target="_blank" rel="noopener">Joe Luca Dooley</a></footer>`;
 }
 
 /* ---------------------- DECK PICKER ---------------------- */
