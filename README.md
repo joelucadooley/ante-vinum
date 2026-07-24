@@ -1,6 +1,6 @@
 # Ante Vinum 🍷
 
-A study companion for the WSET Level 2 Award in Wines. Ten chapters of notes, grape profiles, flashcards and a timed mock exam, all in a single HTML file with no accounts, no tracking and no build step.
+A study companion for the WSET Level 2 Award in Wines. Ten chapters of notes, grape profiles, flashcards, blind tasting and a timed mock exam, all in a single HTML file with no accounts, no tracking and no build step.
 
 **Live site:** [joelucadooley.github.io/ante-vinum](https://joelucadooley.github.io/ante-vinum)
 
@@ -17,9 +17,10 @@ Built around one idea: read first, drill second. Quizzes only tell you what you 
 |------|---------|--------------|
 | **I** — Read | Study notes | Ten chapters covering the whole syllabus, with structure profiles for every principal grape |
 | **II** — Drill | Flashcards | Around 130 cards, tap to flip, grouped by chapter |
-| **III** — Check | Quick quiz | Ten random questions, each explained the moment you answer |
-| **IV** — Sit | Mock exam | Fifty questions in sixty minutes, marked at the end |
-| **V** — Look up | Tasting reference | The systematic tasting vocabulary, and what each wine colour tells you |
+| **III** — Check | Quick quiz | Ten random questions from a bank of 169, each explained the moment you answer |
+| **IV** — Identify | Blind tasting | A tasting note and four wines. Work out what is in the glass from colour, aroma and structure |
+| **V** — Sit | Mock exam | Fifty questions in sixty minutes, marked at the end |
+| **VI** — Look up | Tasting reference | The systematic tasting vocabulary, and what each wine colour tells you |
 
 ---
 
@@ -51,7 +52,8 @@ Questions are spread across six learning outcomes. The mock exam samples them in
 - **Red / white wine mode** — a wine glass toggle that swaps the whole palette between a deep oxblood cellar and a pale straw one. Remembered between visits.
 - **Grape profiles** — acidity, tannin, body and alcohol shown on the same low/medium/high scale the SAT uses, so you learn to identify wines by structure rather than by guessing.
 - **Interactive colour reference** — tap any wine colour to see what it tells you about age, oak and winemaking.
-- **No repeats** — the quiz remembers the last 45 questions it showed you, so consecutive rounds stay fresh.
+- **Blind tasting** — 31 tasting notes written in SAT form. Read the appearance, nose and palate, then name the wine. The explanation tells you which clue gave it away.
+- **169 questions** — enough that two consecutive mock exams share only about a third of their paper.
 - **Installable** — add it to a phone home screen and it launches full screen with its own icon.
 
 ---
