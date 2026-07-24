@@ -40,7 +40,7 @@
   --ink:#25231A; --ink-soft:#5B5A3C; --ink-faint:#68674A;
   --paper:#E7E6CE; --paper-lo:#D2D2AE; --paper-hi:#F4F3E4;
   --card:#FDFDF6; --card-hi:#FFFFFC;
-  --gold:#87761F; --gold-hi:#CCBB5F; --gold-line:#AFA04A;
+  --gold:#76650E; --gold-hi:#CCBB5F; --gold-line:#AFA04A;
   --accent:#6B6420; --rule:rgba(70,68,30,.26); --rule-soft:rgba(70,68,30,.13);
   --good:#4A7150; --bad:#9C3B33;
   --good-bg:rgba(74,113,80,.10); --bad-bg:rgba(156,59,51,.09); --chosen-bg:rgba(122,31,43,.07);
@@ -388,6 +388,24 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:1px solid 
 .swd-h{font-family:var(--display);font-size:26px;font-weight:400;margin:0 0 8px;line-height:1.2}
 .swd-h span{display:block;font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:6px}
 .swd-b{margin:0;font-size:18px;line-height:1.62;color:var(--ink-soft)}
+
+/* ---- blind tasting note ---- */
+.tnote{margin:0 0 26px;padding:24px 24px 20px;border-radius:3px;position:relative;
+  background:linear-gradient(160deg,var(--card-hi),var(--card) 66%);background-color:var(--card);
+  box-shadow:0 1px 2px var(--sh1),0 6px 16px var(--sh1),0 1px 0 var(--emboss) inset}
+.tnote::before{content:"";position:absolute;inset:0;border-radius:3px;border:1px solid var(--rule-soft);pointer-events:none}
+.tnote::after{content:"";position:absolute;inset:7px;border:1px solid var(--gold-line);opacity:.3;pointer-events:none}
+.tn-lead{position:relative;font-family:var(--display);font-size:21px;line-height:1.35;margin:0 0 18px;color:var(--ink)}
+.tn-row{position:relative;display:grid;grid-template-columns:110px 1fr;column-gap:20px;row-gap:4px;padding:11px 0;
+  border-top:1px solid var(--rule-soft);align-items:baseline}
+.tn-k{display:block;font-family:var(--text);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.tn-v{display:block;font-size:18px;line-height:1.5;color:var(--ink)}
+@media(max-width:600px){
+  .tnote{padding:20px 18px 16px}
+  .tn-lead{font-size:19px}
+  .tn-row{grid-template-columns:1fr;row-gap:5px;padding:11px 0}
+  .tn-v{font-size:17px}
+}
 
 /* ---- tasting: colour swatches ---- */
 .swatches{display:flex;flex-direction:column;gap:24px}
