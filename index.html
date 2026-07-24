@@ -90,7 +90,7 @@ body::before{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:0;
 /* vignette */
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background:radial-gradient(115% 78% at 50% 34%, transparent 42%, var(--vignette) 100%)}
-.shell{position:relative;z-index:1;max-width:700px;margin:0 auto;padding:52px 22px 70px}
+.shell{position:relative;z-index:1;max-width:700px;margin:0 auto;padding:46px 22px 70px}
 button{font-family:var(--text);cursor:pointer}
 a{color:inherit}
 button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:1px solid var(--gold);outline-offset:4px}
@@ -185,7 +185,7 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:1px solid 
 
 
 .btn:disabled{opacity:.28;cursor:default}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:30px 0 22px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 0 16px}
 .bar .mid{flex:1;text-align:center}
 .linkback{background:none;border:none;padding:0;font-family:var(--text);font-size:11px;font-weight:400;letter-spacing:.16em;
   text-transform:uppercase;color:var(--ink-soft);transition:color .2s}
@@ -246,18 +246,12 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:1px solid 
 .topbar{position:fixed;top:0;left:0;right:0;z-index:20;
   background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--rule-soft)}
-.topbar-in{max-width:700px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:14px;height:52px}
+.topbar-in{max-width:700px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;height:46px}
 .brand{background:none;border:none;padding:0;font-family:var(--display);font-size:19px;font-weight:400;
   letter-spacing:.1em;text-transform:uppercase;color:var(--ink);white-space:nowrap;flex-shrink:0}
-.navlinks{display:flex;gap:2px;flex:1;justify-content:flex-end;overflow-x:auto;scrollbar-width:none}
-.navlinks::-webkit-scrollbar{display:none}
-.navlinks button{background:none;border:none;padding:8px 9px;font-family:var(--text);font-size:11px;font-weight:400;
-  letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;border-bottom:1px solid transparent}
-.navlinks button.on{color:var(--gold);border-bottom-color:var(--gold)}
 @media(max-width:600px){
-  .topbar-in{height:48px;padding:0 14px;gap:8px}
+  .topbar-in{height:44px;padding:0 14px;gap:8px}
   .brand{font-size:16px;letter-spacing:.06em}
-  .navlinks button{padding:8px 6px;font-size:10px;letter-spacing:.08em}
 }
 
 /* ---- the bottle ---- */
@@ -459,7 +453,7 @@ details.exam-info .inner{padding:0 6px 30px}
 
 @media(max-width:600px){
   body{font-size:16px}
-  .shell{padding:48px 18px 56px}
+  .shell{padding:44px 18px 56px}
   .grid{grid-template-columns:1fr;gap:16px}
   .sat-r{grid-template-columns:1fr;gap:3px;padding:10px 0}
   .sat-k{font-size:15.5px}
@@ -489,7 +483,6 @@ details.exam-info .inner{padding:0 6px 30px}
 <header class="topbar">
   <div class="topbar-in">
     <button class="brand" data-act="home">Ante Vinum</button>
-    <nav class="navlinks" id="navlinks"></nav>
     <button class="themebtn" id="themebtn" aria-label="Switch wine mode" title="Wine mode">&#127863;</button>
   </div>
 </header>
@@ -1513,18 +1506,7 @@ function renderSat(){
 
 /* ---------------------- RENDER + EVENTS ---------------------- */
 
-const NAV=[["notes","Notes"],["flashcards","Cards"],["quiz","Quiz"],["blind","Blind"],["exam","Exam"],["satref","Tasting"]];
-function renderNav(){
- const bar=document.getElementById("navlinks");
- if(state.view==="home"){bar.innerHTML="";return;}
- const cur={home:"",notes:"notes",note:"notes",decks:"flashcards",deck:"flashcards",
-            quiz:(state.quiz&&state.quiz.mode==="exam")?"exam":((state.quiz&&state.quiz.mode==="blind")?"blind":"quiz"),
-            results:(state.quiz&&state.quiz.mode==="exam")?"exam":((state.quiz&&state.quiz.mode==="blind")?"blind":"quiz"),satref:"satref"}[state.view]||"";
- bar.innerHTML=NAV.map(n=>
-   `<button data-act="${n[0]}" class="${cur===n[0]?"on":""}">${n[1]}</button>`).join("");
-}
 function render(){
- renderNav();
  if(state.view==="home")renderHome();
  else if(state.view==="notes")renderNotesList();
  else if(state.view==="note")renderNote();
@@ -1548,6 +1530,11 @@ document.addEventListener("click",e=>{
    z.picked=+t.dataset.opt;z.answers.push({q:z.qs[z.i],pick:z.picked});renderQuiz();return;
  }
  const act=t.dataset.act;
+ // a mock exam in progress is easy to destroy by accident, so confirm first
+ const examLive = state.quiz && state.quiz.mode==="exam" && !state.quiz.done;
+ if(examLive && act && act!=="qnext"){
+   if(!window.confirm("Leave the mock exam? Your answers so far will be lost.")) return;
+ }
  if(act==="home"||act==="quitquiz"){clearInterval(state.timerId);state.quiz=null;state.view="home";render();window.scrollTo(0,0);}
  else if(act==="flashcards"||act==="decks"){state.view="decks";render();window.scrollTo(0,0);}
  else if(act==="notes"){state.view="notes";render();window.scrollTo(0,0);}
